@@ -1,33 +1,46 @@
 ﻿#include <stdio.h>
 #include <stdbool.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
 
 //Definition for singly-linked list.
-typedef struct ListNode {
-	char val;
+struct ListNode {
+	int val;
 	struct ListNode* next;
-}node;
+};
+
+struct TreeNode {
+	int val;
+	struct TreeNode* left;
+	struct TreeNode* right;
+};
+
+struct Bucket
+{
+	int val;
+	int count;
+};
 
 int maxProfit(int* prices, int pricesSize) {
-	int sum = 0;
-	int min= *prices;
-
-	for (int i = 1; i < pricesSize; i++)
+	int minPrice = INT_MAX;
+	int Profit = 0;
+	for (int i = 0; i < pricesSize; i++)
 	{
-		if (sum < prices[i] - min)sum = prices[i] - min;
-		if (prices[i] < min)min = prices[i];
+		Profit = fmax(prices[i] - minPrice, Profit);
+		minPrice = fmin(minPrice, prices[i]);
 	}
-	return sum;
+	return Profit;
 }
 
 int main()
 {
-	/*char str[] = "(){}}{";
-	printf("%d\n",isValid(str));*/
-	//test();
+	struct ListNode l1;
+
+	return 0;
 }
 
 // 執行程式: Ctrl + F5 或 [偵錯] > [啟動但不偵錯] 功能表
